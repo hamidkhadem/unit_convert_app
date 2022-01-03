@@ -2,16 +2,11 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// ignore_for_file: unused_field
-
 import 'package:flutter/material.dart';
 
-// TODO: Check if we need to import anything
 import 'package:unit_convert_app/category.dart';
 
-// TODO: Define any constants
-const iconLocation = Icons.cake;
-const _numberOfItem = 8;
+final _backgroundColor = Colors.green[100];
 
 /// Category Route (screen).
 ///
@@ -34,7 +29,7 @@ class CategoryRoute extends StatelessWidget {
     'Currency',
   ];
 
-  static const _baseColors = <ColorSwatch>[
+  static const _baseColors = <Color>[
     Colors.teal,
     Colors.orange,
     Colors.pinkAccent,
@@ -45,71 +40,50 @@ class CategoryRoute extends StatelessWidget {
     Colors.red,
   ];
 
+  /// Makes the correct number of rows for the list view.
+  ///
+  /// For portrait, we construct a [ListView] from the list of category widgets.
+  Widget _buildCategoryWidgets(List<Widget> categories) {
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int index) => categories[index],
+      itemCount: categories.length,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: Create a list of the eight Categories, using the names and colors
-    // from above. Use a placeholder icon, such as `Icons.cake` for each
-    // Category. We'll add custom icons later.
-    // final lenght = Category(name: name, color: color, iconLocation: iconLocation)
-    final _listCategory = <Category>[
-      Category(
-          name: _categoryNames[0],
-          color: _baseColors[0],
-          iconLocation: iconLocation),
-      Category(
-          name: _categoryNames[1],
-          color: _baseColors[1],
-          iconLocation: iconLocation),
-      Category(
-          name: _categoryNames[2],
-          color: _baseColors[2],
-          iconLocation: iconLocation),
-      Category(
-          name: _categoryNames[3],
-          color: _baseColors[3],
-          iconLocation: iconLocation),
-      Category(
-          name: _categoryNames[4],
-          color: _baseColors[4],
-          iconLocation: iconLocation),
-      Category(
-          name: _categoryNames[5],
-          color: _baseColors[5],
-          iconLocation: iconLocation),
-      Category(
-          name: _categoryNames[6],
-          color: _baseColors[6],
-          iconLocation: iconLocation),
-      Category(
-          name: _categoryNames[7],
-          color: _baseColors[7],
-          iconLocation: iconLocation),
-    ];
+    final categories = <Category>[];
 
-    // TODO: Create a list view of the Categories
-    final listView = ListView.builder(
-        padding: const EdgeInsets.all(8.0),
-        itemCount: _numberOfItem,
-        itemBuilder: (BuildContext context, int index) {
-          return Category(name: _categoryNames[index],
-              color: _baseColors[index],
-              iconLocation: iconLocation);
-        });
+    for (var i = 0; i < _categoryNames.length; i++) {
+      categories.add(Category(
+        name: _categoryNames[i],
+        color: _baseColors[i] as ColorSwatch<dynamic>,
+        iconLocation: Icons.cake,
+      ));
+    }
 
-    // TODO: Create an App Bar
+    final listView = Container(
+      color: _backgroundColor,
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: _buildCategoryWidgets(categories),
+    );
+
     final appBar = AppBar(
+      elevation: 0.0,
       title: const Text(
         'Unit Converter',
-        style: TextStyle(fontSize: 30),
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 30.0,
+        ),
       ),
-      elevation: 0.0,
-      backgroundColor: Colors.green[100],
+      centerTitle: true,
+      backgroundColor: _backgroundColor,
     );
 
     return Scaffold(
       appBar: appBar,
       body: listView,
-      backgroundColor: Colors.green[100],
     );
   }
 }
