@@ -2,9 +2,14 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// ignore_for_file: unused_element
+
 // To keep your imports tidy, follow the ordering guidelines at
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
 import 'package:flutter/material.dart';
+
+import 'package:unit_convert_app/converter_route.dart';
+import 'package:unit_convert_app/unit.dart';
 
 // We use an underscore to indicate that these variables are private.
 // See https://www.dartlang.org/guides/language/effective-dart/design#libraries
@@ -19,6 +24,7 @@ class Category extends StatelessWidget {
   final String name;
   final ColorSwatch color;
   final IconData iconLocation;
+  final List<Unit> units;
 
   /// Creates a [Category].
   ///
@@ -32,7 +38,40 @@ class Category extends StatelessWidget {
     required this.name,
     required this.color,
     required this.iconLocation,
+    required this.units,
   }) : super(key: key);
+
+  /// Navigates to the [ConverterRoute].
+  void _navigateToConverter(BuildContext context) {
+    // TODO: Using the Navigator, navigate to the [ConverterRoute]
+    Navigator.push<void>(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(name),
+              backgroundColor: color,
+            ),
+            body: ConverterRoute(
+              name: name,
+              color: color,
+              units: units,
+            ),
+          );
+          /*return MaterialApp(
+            title: name,
+            home: ConverterRoute(
+              name: name,
+              units: units,
+              color: color,
+            ),
+          );*/
+        },
+      ),
+    );
+    // Navigator.push(context, route);
+  }
 
   /// Builds a custom widget that shows [Category] information.
   ///
@@ -53,8 +92,10 @@ class Category extends StatelessWidget {
           splashColor: color,
           // We can use either the () => function() or the () { function(); }
           // syntax.
+          // TODO: Update this onTap property to call _navigateToConverter()
           onTap: () {
             print('I was tapped!');
+            _navigateToConverter(context);
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
