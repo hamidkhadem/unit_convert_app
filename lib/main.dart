@@ -10,6 +10,15 @@ import 'package:flutter/material.dart';
 // More details at http://dart-lang.github.io/linter/lints/avoid_relative_lib_imports.html
 import 'package:unit_convert_app/category_route.dart';
 
+final color = [
+  Color(0xFF013487),
+  Color(0xFF4CD132),
+  Color(0xFFFFFF),
+  Color.fromARGB(0xFF, 0x42, 0xA5, 0xF5),
+  Color.fromARGB(255, 66, 165, 245),
+  Color.fromRGBO(66, 165, 245, 1.0)
+];
+
 /// The function that is called when main.dart is run.
 void main() {
   runApp(const UnitConverterApp());

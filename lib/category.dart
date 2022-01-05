@@ -6,6 +6,8 @@
 
 // To keep your imports tidy, follow the ordering guidelines at
 // https://www.dartlang.org/guides/language/effective-dart/style#ordering
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 import 'package:unit_convert_app/converter_route.dart';
@@ -44,7 +46,7 @@ class Category extends StatelessWidget {
   /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
     // TODO: Using the Navigator, navigate to the [ConverterRoute]
-    Navigator.push<void>(
+    /*   Navigator.push<void>(
       context,
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
@@ -59,17 +61,33 @@ class Category extends StatelessWidget {
               units: units,
             ),
           );
-          /*return MaterialApp(
+          */ /*return MaterialApp(
             title: name,
             home: ConverterRoute(
               name: name,
               units: units,
               color: color,
             ),
-          );*/
+          );*/ /*
         },
       ),
-    );
+    );*/
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          elevation: 1.0,
+          title: Text(name,
+          style: Theme.of(context).textTheme.headline4,),
+          centerTitle: true,
+          backgroundColor: color,
+        ),
+        body: ConverterRoute(
+          color: color,
+          units: units,
+        ),
+      );
+    }));
     // Navigator.push(context, route);
   }
 
