@@ -6,18 +6,9 @@
 import 'package:flutter/material.dart';
 
 // You can use a relative import, i.e. `import 'category_route.dart;'` or
-// a package import, as shown below.
+// a package import.
 // More details at http://dart-lang.github.io/linter/lints/avoid_relative_lib_imports.html
-import 'package:unit_convert_app/category_route.dart';
-
-final color = [
-  Color(0xFF013487),
-  Color(0xFF4CD132),
-  Color(0xFFFFFF),
-  Color.fromARGB(0xFF, 0x42, 0xA5, 0xF5),
-  Color.fromARGB(255, 66, 165, 245),
-  Color.fromRGBO(66, 165, 245, 1.0)
-];
+import 'category_route.dart';
 
 /// The function that is called when main.dart is run.
 void main() {
@@ -33,10 +24,20 @@ class UnitConverterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Unit Converter',
-      home: CategoryRoute(),
+      theme: ThemeData(
+        textTheme: Theme.of(context).textTheme.apply(
+          bodyColor: Colors.black,
+          displayColor: Colors.grey[600],
+        ),
+        // This colors the [InputOutlineBorder] when it is selected
+        primaryColor: Colors.grey[500],
+        textSelectionTheme:
+        TextSelectionThemeData(selectionHandleColor: Colors.green[500]),
+      ),
+      home: const CategoryRoute(),
     );
   }
 }
